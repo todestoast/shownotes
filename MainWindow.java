@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,14 +23,19 @@ public class MainWindow extends JFrame
 	JButton button;
 	Linkmanager lm;
 	
-	public MainWindow( Dimension dimension )
+	File file;
+
+	
+	public MainWindow( Dimension dimension, File file )
 	{
-		this.lm = new Linkmanager();
+		
+		this.lm = new Linkmanager(file);
 		
 		this.setSize( dimension );
 		this.setDefaultCloseOperation( EXIT_ON_CLOSE );
 		
 		this.setLayout( new BorderLayout() );
+		this.file = file;
 		
 		this.panel = new JPanel();
 		this.textfield = new JTextField( 30 );

@@ -7,7 +7,7 @@ public class Main
 
 	public static void main(String[] args) 
 	{
-		MainWindow mainwindow = new MainWindow( new Dimension(400, 130) );
+		SetupDialog setupDialog = new SetupDialog( new Dimension (200,120) );
 
 	}
 

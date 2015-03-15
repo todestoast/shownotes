@@ -8,10 +8,10 @@ public class Linkmanager
 	FileManager fm;
 	File file;
 	
-	public Linkmanager()
+	public Linkmanager( File file )
 	{
 		this.fm = new FileManager();
-		this.file = new File( "test.html" );
+		this.file = file;
 		fm.writeInFile( file, "<div>Die Shownotes wurden mit der Software <a href='https://github.com/todestoast/shownotes/'>shownotes</a> "
 				+ "erstellt. Die Lizenzen der verwendeten Logos finden sich <a href='https://github.com/todestoast/shownotes/blob/master/LOGOS.md'>hier</a></div><br />");
 	}
@@ -31,6 +31,7 @@ public class Linkmanager
 		final CharSequence twitter = "twitter.com";
 		final CharSequence wikipedia = "wikipedia.org";
 		final CharSequence youtube = "youtube.com";
+		final CharSequence tvtropes = "tvtropes.org";
 		
 		final String domain = "http://files.tuximail.de/pics/";
 		final String wwwlogo = "www.png";
@@ -39,6 +40,7 @@ public class Linkmanager
 		final String twitterlogo = "twitter.png";
 		final String wikipedialogo = "wikipedia.png";
 		final String youtubelogo = "youtube.png";
+		final String tvtropeslogo = "tvtropes.png";
 		
 		String returnstring = wwwlogo;
 		
@@ -61,6 +63,10 @@ public class Linkmanager
 		if( url.contains(youtube) )
 		{
 			returnstring = youtubelogo;
+		}
+		if( url.contains(tvtropes) )
+		{
+			returnstring = tvtropeslogo;
 		}
 		
 		return domain + returnstring;
