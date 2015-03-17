@@ -27,8 +27,10 @@ public class Linkmanager
 	public String  getIcon( String url )
 	{
 		final CharSequence imdb = "imdb.com";
-		final CharSequence amazon = "amazon.de";
-		final CharSequence twitter = "twitter.com";
+		final CharSequence amazon = "://amazon.de";
+		final CharSequence amazonwww = "www.amazon.de";
+		final CharSequence twitter = "://twitter.com";
+		final CharSequence twitterwww = "www.twitter.com";
 		final CharSequence wikipedia = "wikipedia.org";
 		final CharSequence youtube = "youtube.com";
 		final CharSequence tvtropes = "tvtropes.org";
@@ -48,11 +50,11 @@ public class Linkmanager
 		{
 			returnstring = imdblogo;
 		}
-		if( url.contains(amazon) )
+		if( url.contains(amazon) || url.contains(amazonwww) )
 		{
 			returnstring = amazonlogo;
 		}
-		if( url.contains(twitter) )
+		if( url.contains(twitter) || url.contains(twitterwww) )
 		{
 			returnstring = twitterlogo;
 		}
