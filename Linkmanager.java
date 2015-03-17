@@ -34,6 +34,7 @@ public class Linkmanager
 		final CharSequence wikipedia = "wikipedia.org";
 		final CharSequence youtube = "youtube.com";
 		final CharSequence tvtropes = "tvtropes.org";
+		final CharSequence vimeo = "vimeo.com";
 		
 		final String domain = "http://files.tuximail.de/pics/";
 		final String wwwlogo = "www.png";
@@ -43,6 +44,7 @@ public class Linkmanager
 		final String wikipedialogo = "wikipedia.png";
 		final String youtubelogo = "youtube.png";
 		final String tvtropeslogo = "tvtropes.png";
+		final String vimeologo = "vimeo.png";
 		
 		String returnstring = wwwlogo;
 		
@@ -69,6 +71,10 @@ public class Linkmanager
 		if( url.contains(tvtropes) )
 		{
 			returnstring = tvtropeslogo;
+		}
+		if( url.contains(vimeo) )
+		{
+			returnstring = vimeologo;
 		}
 		
 		return domain + returnstring;
