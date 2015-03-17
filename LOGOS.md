@@ -13,3 +13,5 @@ amazon logo: https://commons.wikimedia.org/wiki/File:Amazon-icon.png (https://cr
 wikipedia logo: https://en.wikipedia.org/wiki/File:Wikipedia-logo-v2.svg (https://wikimediafoundation.org/wiki/Trademark_Policy)
 
 tv tropes logo: http://static.tvtropes.org/logo_blue_small.png (https://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+vimeo logo: http://commons.wikimedia.org/wiki/File:Vimeo_icon_block.png (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
