@@ -16,12 +16,22 @@ public class Linkmanager
 				+ "erstellt. Die Lizenzen der verwendeten Logos finden sich <a href='https://github.com/todestoast/shownotes/blob/master/LOGOS.md'>hier</a></div><br />");
 	}
 	
-	public void addLink( String url, String text )
+	public void addLink( String url, String text, boolean link )
 	{
-		final String linkhtml = "<img src='" + this.getIcon(url) + "' alt='logo' /> <a href='" + url.toString() + "'>"
-				+ text.toString() + "</a> ";
+		if( link )
+		{
+			final String linkhtml = "<img src='" + this.getIcon(url) + "' alt='logo' /> <a href='" + url.toString() + "'>"
+					+ text.toString() + "</a>&#8226; ";
+			
+			fm.writeInFile( file, linkhtml.toString() );
+		}else
+		{
+			final String timestamp = url.toString();
+			
+			final String timestamphtml = "<ul><li><strong>" + text.toString() + " [" +  timestamp + "]</strong></li></ul>";
+			fm.writeInFile( file, timestamphtml.toString() );
+		}
 		
-		fm.writeInFile( file, linkhtml.toString() );
 	}
 	
 	public String  getIcon( String url )
@@ -35,6 +45,7 @@ public class Linkmanager
 		final CharSequence youtube = "youtube.com";
 		final CharSequence tvtropes = "tvtropes.org";
 		final CharSequence vimeo = "vimeo.com";
+		final CharSequence moviepilot = "moviepilot.de";
 		
 		final String domain = "http://files.tuximail.de/pics/";
 		final String wwwlogo = "www.png";
@@ -45,6 +56,7 @@ public class Linkmanager
 		final String youtubelogo = "youtube.png";
 		final String tvtropeslogo = "tvtropes.png";
 		final String vimeologo = "vimeo.png";
+		final String moviepilotlogo = "moviepilot.png";
 		
 		String returnstring = wwwlogo;
 		
@@ -75,6 +87,10 @@ public class Linkmanager
 		if( url.contains(vimeo) )
 		{
 			returnstring = vimeologo;
+		}
+		if( url.contains(moviepilot) )
+		{
+			returnstring = moviepilotlogo;
 		}
 		
 		return domain + returnstring;

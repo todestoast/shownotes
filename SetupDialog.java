@@ -18,6 +18,8 @@ public class SetupDialog extends JFrame
 	JTextField number;
 	JTextField project;
 	
+	JFrame hier = this;
+	
 	JLabel name;
 	JLabel nummer; 
 	
@@ -58,7 +60,7 @@ public class SetupDialog extends JFrame
 			{
 				File file = new File ( number.getText() + "-" + project.getText() + ".html" );
 				MainWindow mainwindow = new MainWindow( new Dimension(400, 130), file );
-				
+				hier.setVisible(false);
 			}
 		});
 		

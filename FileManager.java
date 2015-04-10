@@ -78,14 +78,6 @@ public class FileManager
 		
 	}
 	
-	public void rewriteFile( File file, String text )
-	{
-		this.emptyFile(file);
-		this.writeInFile(file, "################################## \n"
-				+ "##CAUTION! Don't edit this file manually! \n"
-				+ "##passer will not work if you destroy the assumed structure of this file! \n" + text);
-	}
-	
 	public void deleteFile( String filename )
 	{
 		try{
