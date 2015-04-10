@@ -21,7 +21,7 @@ public class Linkmanager
 		if( link )
 		{
 			final String linkhtml = "<img src='" + this.getIcon(url) + "' alt='logo' /> <a href='" + url.toString() + "'>"
-					+ text.toString() + "</a>&#8226; ";
+					+ text.toString() + " </a>&#8226; ";
 			
 			fm.writeInFile( file, linkhtml.toString() );
 		}else
