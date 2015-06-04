@@ -57,7 +57,7 @@ public class FileManager
 	{
 			try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter( file, true)))) 
 			{
-			    out.print( text );
+			    out.print( fixUmlaute(text) );
 			}catch (IOException e) 
 			{
 			    System.out.println( "Couldn't write in File" );
@@ -76,6 +76,19 @@ public class FileManager
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public String fixUmlaute( String umlauttext )
+	{
+		umlauttext = umlauttext.replaceAll( "ö", "&ouml;" );
+		umlauttext = umlauttext.replaceAll( "ä", "&auml;" );
+		umlauttext = umlauttext.replaceAll( "ü", "&uuml;" );
+		umlauttext = umlauttext.replaceAll( "Ä", "&Auml;" );
+		umlauttext = umlauttext.replaceAll( "Ö", "&Ouml;" );
+		umlauttext = umlauttext.replaceAll( "Ü", "&Uuml;" );
+		
+		
+		return umlauttext;
 	}
 	
 	public void deleteFile( String filename )

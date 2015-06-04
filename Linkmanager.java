@@ -26,10 +26,17 @@ public class Linkmanager
 			fm.writeInFile( file, linkhtml.toString() );
 		}else
 		{
+			FileManager pcsManager = new FileManager();
+			
 			final String timestamp = url.toString();
 			
 			final String timestamphtml = "<ul><li><strong>" + text.toString() + " [" +  timestamp + "]</strong></li></ul>";
 			fm.writeInFile( file, timestamphtml.toString() );
+			
+			File pcsFile = new File( file.getAbsolutePath().replaceAll(".html", ".pcs") );
+			
+			pcsManager.writeInFile(pcsFile, url + ".000" + " " + text + "\n");
+			
 		}
 		
 	}

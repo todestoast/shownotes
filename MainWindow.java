@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class MainWindow extends JFrame 
+public class MainWindow extends JFrame implements ItemListener 
 {
 	JPanel panel;
 	JTextField textfield;
@@ -27,6 +27,7 @@ public class MainWindow extends JFrame
 	Linkmanager lm;
 	Checkbox checkbox;
 	JLabel checklabel;
+	Boolean wasset;
 	
 	File file;
 	
@@ -35,6 +36,7 @@ public class MainWindow extends JFrame
 	{
 		
 		this.lm = new Linkmanager(file);
+		this.wasset = false;
 		
 		this.setSize( dimension );
 		this.setDefaultCloseOperation( EXIT_ON_CLOSE );
@@ -88,16 +90,33 @@ public class MainWindow extends JFrame
 			}
 		});
 		
-		this.checkbox.addItemListener( new ItemListener() {
+		this.checkbox.addItemListener( this ); 
+		
+	}
+
+
+	@Override
+	public void itemStateChanged(ItemEvent e) 
+	{
+
+		if( this.wasset )
+		{
+			linklabel.setText( "Link:" );
+			linkfield.setText( "" );
 			
-			@Override
-			public void itemStateChanged(ItemEvent arg0) 
-			{
-				linklabel.setText( "Timestamp:" );
-				textlabel.setText( "Title:" );
-				textfield.requestFocus();
-			}
-		});
+			textlabel.setText( "Text:" );
+			textfield.setText( "" );
+			textfield.requestFocus();
+			this.wasset = false;
+		}else
+		{
+			linklabel.setText( "Timestamp:" );
+			textlabel.setText( "Title:" );
+			textfield.requestFocus();
+			this.wasset = true;
+		}
+		
+		
 		
 	}
 	
