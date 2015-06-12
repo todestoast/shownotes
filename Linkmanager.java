@@ -53,6 +53,15 @@ public class Linkmanager
 		final CharSequence tvtropes = "tvtropes.org";
 		final CharSequence vimeo = "vimeo.com";
 		final CharSequence moviepilot = "moviepilot.de";
+		final CharSequence geocaching = "geocaching.com";
+		final CharSequence coordinfo = "coord.info";
+		final CharSequence soundcloud = "soundcloud.com";
+		final CharSequence spon = "spiegel.de";
+		final CharSequence facebook = "facebook.com";
+		final CharSequence hld = "heissluftdampfer.de";
+		final CharSequence bwt = "bewegtton.de";
+		final CharSequence onahrung = "ohren-nahrung.de";
+		final CharSequence faz = "faz.net";
 		
 		final String domain = "http://files.tuximail.de/pics/";
 		final String wwwlogo = "www.png";
@@ -64,6 +73,14 @@ public class Linkmanager
 		final String tvtropeslogo = "tvtropes.png";
 		final String vimeologo = "vimeo.png";
 		final String moviepilotlogo = "moviepilot.png";
+		final String geocachinglogo = "geocaching.png";
+		final String soundcloudlogo = "soundcloud.png";
+		final String sponlogo = "spon.png";
+		final String facebooklogo = "facebook.png";
+		final String hldlogo = "hld.png";
+		final String bwtlogo = "bewegtton.png";
+		final String onahrunglogo = "onahrung.png";
+		final String fazlogo = "faz.png";
 		
 		String returnstring = wwwlogo;
 		
@@ -99,6 +116,39 @@ public class Linkmanager
 		{
 			returnstring = moviepilotlogo;
 		}
+		if( url.contains(geocaching) || url.contains(coordinfo) )
+		{
+			returnstring = geocachinglogo;
+		}
+		if( url.contains(soundcloud) )
+		{
+			returnstring = soundcloudlogo;
+		}
+		if( url.contains(spon) )
+		{
+			returnstring = sponlogo;
+		}
+		if( url.contains(facebook) )
+		{
+			returnstring = facebooklogo;
+		}
+		if( url.contains(hld) )
+		{
+			returnstring = hldlogo;
+		}
+		if( url.contains(bwt) )
+		{
+			returnstring = bwtlogo;
+		}
+		if( url.contains(onahrung))
+		{
+			returnstring = onahrunglogo;
+		}
+		if( url.contains(faz) )
+		{
+			returnstring = fazlogo;
+		}
+		
 		
 		return domain + returnstring;
 	}
