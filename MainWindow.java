@@ -8,15 +8,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.jar.Attributes.Name;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
-public class MainWindow extends JFrame implements ItemListener 
+public class MainWindow extends JFrame implements ItemListener, DocumentListener
 {
 	JPanel panel;
 	JTextField textfield;
@@ -28,15 +33,19 @@ public class MainWindow extends JFrame implements ItemListener
 	Checkbox checkbox;
 	JLabel checklabel;
 	Boolean wasset;
+	int vorher;
+	boolean autocomplete;
 	
 	File file;
 	
 	
-	public MainWindow( Dimension dimension, File file )
+	public MainWindow( Dimension dimension, File file, final boolean newline, final boolean autocomplete )
 	{
 		
 		this.lm = new Linkmanager(file);
 		this.wasset = false;
+		vorher = 0;
+		this.autocomplete = autocomplete;
 		
 		this.setSize( dimension );
 		this.setDefaultCloseOperation( EXIT_ON_CLOSE );
@@ -61,10 +70,10 @@ public class MainWindow extends JFrame implements ItemListener
 		this.linklabel.setVisible( true );
 		
 		this.panel.setLayout( new FlowLayout() );
-		this.panel.add( this.textlabel );
-		this.panel.add( this.textfield );
 		this.panel.add( this.linklabel );
 		this.panel.add( this.linkfield );
+		this.panel.add( this.textlabel );
+		this.panel.add( this.textfield );
 		this.panel.add( this.button );
 		this.panel.add( this.checklabel );
 		this.panel.add( this.checkbox );
@@ -73,12 +82,15 @@ public class MainWindow extends JFrame implements ItemListener
 		
 		this.setVisible( true );
 		
+		
+		this.linkfield.getDocument().addDocumentListener( this );
+		
 		this.button.addActionListener( new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				lm.addLink( linkfield.getText(), textfield.getText(), !checkbox.getState() );
+				lm.addLink( linkfield.getText(), textfield.getText(), !checkbox.getState(), newline );
 				checkbox.setState( false );
 				
 				linklabel.setText( "Link:" );
@@ -86,7 +98,9 @@ public class MainWindow extends JFrame implements ItemListener
 				
 				textlabel.setText( "Text:" );
 				textfield.setText( "" );
-				textfield.requestFocus();
+				linkfield.requestFocus();
+				
+				vorher=0;
 			}
 		});
 		
@@ -106,17 +120,57 @@ public class MainWindow extends JFrame implements ItemListener
 			
 			textlabel.setText( "Text:" );
 			textfield.setText( "" );
-			textfield.requestFocus();
+			linkfield.requestFocus();
 			this.wasset = false;
 		}else
 		{
-			linklabel.setText( "Timestamp:" );
+			linklabel.setText( "Time:" );
 			textlabel.setText( "Title:" );
-			textfield.requestFocus();
+			linkfield.requestFocus();
 			this.wasset = true;
 		}
 		
 		
+		
+	}
+
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void insertUpdate(DocumentEvent e) 
+	{
+		if(autocomplete)
+		{
+		
+		this.vorher++;
+		String text = linkfield.getText();
+		
+		
+	//	System.out.println( "Aktion im linkfeld" );
+		if( text.length() > 5 && !checkbox.getState() && vorher < 2 )
+		{
+			
+			if( !(text.contains("http")) )
+			{
+				text = "http://" + text;
+			}
+			textfield.setText( lm.getHeader(text) );
+			vorher = 0;
+		}
+		}
+		
+	}
+
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	

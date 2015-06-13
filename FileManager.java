@@ -7,6 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FileManager 
@@ -15,7 +20,50 @@ public class FileManager
 	{
 		
 	}
-	
+	public List<String> getheaderlines( String filename)
+	{
+		String returnstring = "";
+		CharSequence header = "<h1";
+		CharSequence headerend = "</h1>";
+		List<String> returns = new ArrayList<String>();
+		 String temp = "";
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(filename),
+                    Charset.defaultCharset());
+            for (String line : lines) {
+                
+            	StringBuffer linebuffer = new StringBuffer( line );
+            	//System.out.println(line + "\n");
+            	
+            	
+            	char[] array = new char[500];
+            	String tempus = "";
+            	
+            	while( linebuffer.length() > 500 )
+            	{
+            		linebuffer.getChars(0, 500, array, 0);
+            		
+                	linebuffer.delete(0, 500);
+                	tempus = new String( array );
+                	if( tempus.contains(header) || tempus.contains(headerend) )
+                	{
+                		temp = new String ( array );
+                		returns.add( temp );
+                	}
+                	
+            	}
+            	
+            	
+            
+            }
+            
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return returns;
+	}
 	public String getContentofFile( File file )
 	{
 		String returnstring = "";
@@ -33,7 +81,7 @@ public class FileManager
 	       returnstring  = sb.toString();
 	    } catch( Exception e )
 	    {
-	    	System.out.println( "Error while trying to read from secret file!" );
+	    	System.out.println( "Error while trying to read from file!" );
 	    }
 	    return this.removeComment( new StringBuffer(returnstring) );
 	}
@@ -86,6 +134,7 @@ public class FileManager
 		umlauttext = umlauttext.replaceAll( "Ä", "&Auml;" );
 		umlauttext = umlauttext.replaceAll( "Ö", "&Ouml;" );
 		umlauttext = umlauttext.replaceAll( "Ü", "&Uuml;" );
+		umlauttext = umlauttext.replaceAll( "ß", "&szlig;" );
 		
 		
 		return umlauttext;

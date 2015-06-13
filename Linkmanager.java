@@ -1,6 +1,15 @@
 package shownotes;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
 
 public class Linkmanager 
 {
@@ -16,12 +25,129 @@ public class Linkmanager
 				+ "erstellt. Die Lizenzen der verwendeten Logos finden sich <a href='https://github.com/todestoast/shownotes/blob/master/LOGOS.md'>hier</a></div><br />");
 	}
 	
-	public void addLink( String url, String text, boolean link )
+	public String getHeader( String stringurl )
+	{
+		URL url;
+		File contentfile = file; //dummyvalue!
+		 
+		try {
+			// get URL content
+			url = new URL(stringurl);
+			URLConnection conn = url.openConnection();
+ 
+			// open the stream and put it into BufferedReader
+			BufferedReader br = new BufferedReader(
+                               new InputStreamReader(conn.getInputStream()));
+ 
+			String inputLine;
+ 
+			//save to this filename
+			String fileName = "content.html";
+			contentfile = new File(fileName);
+ 
+			if (!contentfile.exists()) {
+				contentfile.createNewFile();
+			}
+ 
+			//use FileWriter to write file
+			FileWriter fw = new FileWriter(contentfile.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+ 
+			while ((inputLine = br.readLine()) != null) {
+				bw.write(inputLine);
+			}
+ 
+			bw.close();
+			br.close();
+ 
+			System.out.println("Done");
+			
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+			FileManager fm = new FileManager();
+			//StringBuffer content = new StringBuffer( fm.getContentofFile(file) );
+			List<String> contents = fm.getheaderlines( "content.html" );
+			fm.deleteFile( contentfile.getName() );
+			if( !(contents.size() > 0) )
+			{
+				return "";
+			}
+			String finalcontent = "";
+			//alles bis header1 tag
+			
+			String content = "";
+			for (String string : contents) 
+			{
+				content = content + string;
+				
+			}
+				
+				content = content.replaceAll( "</span>", "" );
+				content = content.replaceAll( "<span", "" );
+				content = content.replaceAll( "</div>", "" );
+				content = content.replaceAll( "<div", "" );
+				content = content.replaceAll( "</a>", "" );
+				content = content.replaceAll( "\t", "" );
+				//content = content.replaceAll( "\n", "" );
+				//System.out.println( "vorher: " + content );
+				//int ende = content.indexOf("</h1>");
+				
+				String tempfinal = "";
+				StringBuffer muh = new StringBuffer( content );
+				content = muh.delete(content.indexOf("</h1>"), content.length()).toString(); //löscht alles bis zum Ende
+				content = content.trim();
+			//	ende = content.indexOf("</h1>");
+				
+				//System.out.println( "nacher: " + content );
+				for( int index = content.length()-1; index > 0; index --)
+				{	
+					//sortiert richtiherum, da rückwärts erfasst wird
+					tempfinal = finalcontent;
+					finalcontent = "";
+					finalcontent = content.charAt(index) + tempfinal;
+					//System.out.println( content.charAt(index) );
+					if( content.charAt(index) == '>')
+					{
+						StringBuffer deleteBuffer = new StringBuffer( finalcontent );
+						deleteBuffer.deleteCharAt(0); //schmeißt das > wieder raus
+						finalcontent = deleteBuffer.toString();
+						break;
+					}
+				}
+				
+				//Umlaute zur besseren Lesbarkeit umwandeln 
+				finalcontent = finalcontent.replaceAll( "&ouml;", "ö" );
+				finalcontent = finalcontent.replaceAll( "&auml;", "ä" );
+				finalcontent = finalcontent.replaceAll( "&uuml;", "ü" );
+				finalcontent = finalcontent.replaceAll( "&Auml;", "A" );
+				finalcontent = finalcontent.replaceAll( "&Ouml;", "Ö" );
+				finalcontent = finalcontent.replaceAll( "&Uuml;", "Ü" );
+				finalcontent = finalcontent.replaceAll( "&szlig;", "ß" );
+				finalcontent = finalcontent.replaceAll( "&amp;", "&" );
+				finalcontent = finalcontent.replaceAll( "»", "" );
+				finalcontent = finalcontent.replaceAll( "«", "" );
+				
+				
+				
+			return finalcontent;
+		
+	}
+	
+	public void addLink( String url, String text, boolean link, boolean newline )
 	{
 		if( link )
 		{
-			final String linkhtml = "<img src='" + this.getIcon(url) + "' alt='logo' /> <a href='" + url.toString() + "'>"
+			 String linkhtml = "<img src='" + this.getIcon(url) + "' alt='logo' /> <a href='" + url.toString() + "'>"
 					+ text.toString() + " </a>&#8226; ";
+			
+			if( newline )
+			{
+				linkhtml = linkhtml + "\n";
+			}
 			
 			fm.writeInFile( file, linkhtml.toString() );
 		}else
