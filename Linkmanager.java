@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.rmi.UnknownHostException;
 import java.util.List;
 
 public class Linkmanager 
@@ -36,9 +37,18 @@ public class Linkmanager
 			URLConnection conn = url.openConnection();
  
 			// open the stream and put it into BufferedReader
-			BufferedReader br = new BufferedReader(
-                               new InputStreamReader(conn.getInputStream()));
- 
+			
+			BufferedReader br = null;
+			try
+			{
+				 br = new BufferedReader(
+                        new InputStreamReader(conn.getInputStream()));
+
+			}catch( Exception e )
+			{
+				System.out.println( "Host " + e.getMessage() + " not found" );
+			}
+			
 			String inputLine;
  
 			//save to this filename
@@ -53,12 +63,15 @@ public class Linkmanager
 			FileWriter fw = new FileWriter(contentfile.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
  
-			while ((inputLine = br.readLine()) != null) {
+			while ((br != null && (inputLine = br.readLine()) != null)) {
 				bw.write(inputLine);
 			}
  
 			bw.close();
-			br.close();
+			if( br != null )
+			{
+				br.close();
+			}
  
 			System.out.println("Done");
 			
@@ -70,8 +83,9 @@ public class Linkmanager
 		
 			FileManager fm = new FileManager();
 			//StringBuffer content = new StringBuffer( fm.getContentofFile(file) );
-			List<String> contents = fm.getheaderlines( "content.html" );
-			fm.deleteFile( contentfile.getName() );
+			List<String> contents = fm.getheaderlines( contentfile.getName() );
+			//content.html hier hardcoded, weil bei einer exception der Name des output files hier durch Pointerverschiebung reinrutschen kann und das löscht das Ganze file!
+			fm.deleteFile( "content.html" );
 			if( !(contents.size() > 0) )
 			{
 				return "";

@@ -33,7 +33,6 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 	Checkbox checkbox;
 	JLabel checklabel;
 	Boolean wasset;
-	int vorher;
 	boolean autocomplete;
 	
 	File file;
@@ -44,7 +43,6 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 		
 		this.lm = new Linkmanager(file);
 		this.wasset = false;
-		vorher = 0;
 		this.autocomplete = autocomplete;
 		
 		this.setSize( dimension );
@@ -100,7 +98,6 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 				textfield.setText( "" );
 				linkfield.requestFocus();
 				
-				vorher=0;
 			}
 		});
 		
@@ -148,21 +145,19 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 		if(autocomplete)
 		{
 		
-		this.vorher++;
 		String text = linkfield.getText();
 		
 		
-	//	System.out.println( "Aktion im linkfeld" );
-		if( text.length() > 5 && !checkbox.getState() && vorher < 2 )
-		{
-			
-			if( !(text.contains("http")) )
+		//	System.out.println( "Aktion im linkfeld" );
+			if( text.length() > 5 && !checkbox.getState() )
 			{
-				text = "http://" + text;
+			
+				if( !(text.contains("http://") || text.contains("https://")) )
+				{
+					text = "http://" + text;
+				}
+				textfield.setText( lm.getHeader(text) );
 			}
-			textfield.setText( lm.getHeader(text) );
-			vorher = 0;
-		}
 		}
 		
 	}
