@@ -38,7 +38,7 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 	File file;
 	
 	
-	public MainWindow( Dimension dimension, File file, final boolean newline, final boolean autocomplete )
+	public MainWindow( Dimension dimension, File file, final boolean newline, final boolean autocomplete, final boolean affiliate, final String affiliatename )
 	{
 		
 		this.lm = new Linkmanager(file);
@@ -88,7 +88,7 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				lm.addLink( linkfield.getText(), textfield.getText(), !checkbox.getState(), newline );
+				lm.addLink( linkfield.getText(), textfield.getText(), !checkbox.getState(), newline, affiliate, affiliatename );
 				checkbox.setState( false );
 				
 				linklabel.setText( "Link:" );

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,6 +38,13 @@ public class SetupDialog extends JFrame
 	Checkbox autobox;
 	JButton button;
 	
+	JLabel affiliatelabel;
+	Checkbox affiliatebox;
+	JLabel affiliatenamelabel;
+	JTextField affiliatenamefield;
+	JPanel affiliatepanel;
+	JPanel affiliatenamepanel;
+	
 	public SetupDialog( Dimension dimension )
 	{
 		this.setSize( dimension );
@@ -59,6 +67,12 @@ public class SetupDialog extends JFrame
 		this.umbruch = new JLabel( "New line after each entry?" );
 		this.umbruchzusatz = new JLabel( "(may not work under wordpress)" );
 		this.check = new Checkbox();
+		this.affiliatelabel = new JLabel( "Generate amazon affiliate Links?" );
+		this.affiliatebox = new Checkbox();
+		this.affiliatepanel = new JPanel();
+		this.affiliatenamelabel = new JLabel( "Amazon affiliate ID:" );
+		this.affiliatenamefield = new JTextField(10);
+		this.affiliatenamepanel = new JPanel();
 		
 		this.namenpanel.setLayout( new FlowLayout() );
 		this.namenpanel.add( name );
@@ -74,6 +88,13 @@ public class SetupDialog extends JFrame
 		this.panel3.add( this.umbruchzusatz );
 		this.panel2.setVisible( true );
 		
+		
+		this.affiliatepanel.add( this.affiliatelabel);
+		this.affiliatepanel.add( this.affiliatebox );
+		
+		this.affiliatenamepanel.add( this.affiliatenamelabel );
+		this.affiliatenamepanel.add( this.affiliatenamefield );
+		
 		this.autopanel.add( this.autolabel );
 		this.autopanel.add( this.autobox );
 		
@@ -81,6 +102,8 @@ public class SetupDialog extends JFrame
 		this.add( nummerpanel );
 		this.add( panel2 );
 		this.add( panel3 );
+		this.add( affiliatepanel );
+		this.add( affiliatenamepanel );
 		this.add( autopanel );
 		this.add( button );
 		this.setVisible( true );
@@ -91,7 +114,7 @@ public class SetupDialog extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				File file = new File ( number.getText() + "-" + project.getText() + ".html" );
-				MainWindow mainwindow = new MainWindow( new Dimension(400, 130), file, check.getState(), autobox.getState() );
+				MainWindow mainwindow = new MainWindow( new Dimension(400, 130), file, check.getState(), autobox.getState(), affiliatebox.getState(), affiliatenamefield.getText() );
 				hier.setVisible(false);
 			}
 		});

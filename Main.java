@@ -13,7 +13,7 @@ public class Main
 		
 		updatehandler.doUpdate();
 		
-		SetupDialog setupDialog = new SetupDialog( new Dimension (250,240) );
+		SetupDialog setupDialog = new SetupDialog( new Dimension (300,340) );
 
 	}
 

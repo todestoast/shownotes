@@ -151,10 +151,40 @@ public class Linkmanager
 		
 	}
 	
-	public void addLink( String url, String text, boolean link, boolean newline )
+	public void addLink( String url, String text, boolean link, boolean newline, boolean affilitate, String affiliatename )
 	{
 		if( link )
 		{
+			if( url.contains("://amazon.de") || url.contains("www.amazon.de") && affilitate )
+			{
+				StringBuffer tempurl = new StringBuffer( url );
+				tempurl = tempurl.delete(0, tempurl.indexOf(":/")+2 );
+				boolean found = false;
+				char[] sequence;
+				
+				while( !found )
+				{
+					sequence = new char[1000];
+					
+					tempurl.getChars(tempurl.indexOf("/"), tempurl.indexOf("/", tempurl.indexOf("/")+1), sequence, 0);
+					tempurl = tempurl.delete(tempurl.indexOf("/"), tempurl.indexOf("/", tempurl.indexOf("/")+1) );
+					
+					String sequencestring = new String( sequence ).trim();
+					
+					if( sequencestring.toUpperCase().equals(sequencestring) )
+					{
+						found = true;
+						
+						//StringBuffer temp = new StringBuffer( sequencestring );
+						
+						url = "http://www.amazon.de/exec/obidos/ASIN" + sequencestring + "/" + affiliatename;
+					}else
+					{
+						found = false;
+					}
+				}
+				
+			}
 			 String linkhtml = "<img src='" + this.getIcon(url) + "' alt='logo' /> <a href='" + url.toString() + "'>"
 					+ text.toString() + " </a>&#8226; ";
 			
