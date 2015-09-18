@@ -202,6 +202,7 @@ public class Linkmanager
 		final CharSequence bwt = "bewegtton.de";
 		final CharSequence onahrung = "ohren-nahrung.de";
 		final CharSequence faz = "faz.net";
+		final CharSequence github = "github.com";
 		
 		final String domain = "http://files.tuximail.de/pics/";
 		final String wwwlogo = "www.png";
@@ -221,6 +222,7 @@ public class Linkmanager
 		final String bwtlogo = "bewegtton.png";
 		final String onahrunglogo = "onahrung.png";
 		final String fazlogo = "faz.png";
+		final String githublogo = "github.png";
 		
 		String returnstring = wwwlogo;
 		
@@ -287,6 +289,10 @@ public class Linkmanager
 		if( url.contains(faz) )
 		{
 			returnstring = fazlogo;
+		}
+		if( url.contains(github) )
+		{
+			returnstring = githublogo;
 		}
 		
 		

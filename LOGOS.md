@@ -17,3 +17,21 @@ tv tropes logo: http://static.tvtropes.org/logo_blue_small.png (https://creative
 vimeo logo: http://commons.wikimedia.org/wiki/File:Vimeo_icon_block.png (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
 
 moviepilot logo: https://de.wikipedia.org/wiki/Datei:Moviepilot-Logo.svg (https://creativecommons.org/licenses/by-sa/3.0/deed.de)
+
+geocaching logo: https://commons.wikimedia.org/wiki/File:Geocaching.svg (https://en.wikipedia.org/wiki/Public_domain)
+
+soundcloud logo: https://commons.wikimedia.org/wiki/File:Soundcloud_Shiny_Icon.svg (https://creativecommons.org/publicdomain/zero/1.0/deed.en)
+
+Spiegel Online logo: own creation
+
+Facebook logo: https://commons.wikimedia.org/wiki/Category:Facebook#/media/File:F_icon.svg (https://en.wikipedia.org/wiki/Public_domain)
+
+Heissluftdampfer logo: own creation
+
+bewegtton logo: https://openclipart.org/detail/171449/movie-tape-chaplin-remix (https://en.wikipedia.org/wiki/Public_domain)
+
+ohren nahrung logo: own creation
+
+faz logo: https://de.wikipedia.org/wiki/Datei:Frankfurter_Allgemeine_logo.svg (https://en.wikipedia.org/wiki/Public_domain)
+
+github logo: https://en.wikipedia.org/wiki/File:GitHub_logo_2013_padded.svg (https://en.wikipedia.org/wiki/Public_domain)
