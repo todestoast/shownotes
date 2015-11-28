@@ -185,7 +185,7 @@ public class Linkmanager
 				}
 				
 			}
-			 String linkhtml = "<img src='" + this.getIcon(url) + "' alt='logo' /> <a href='" + url.toString() + "'>"
+			 String linkhtml = "<img class='shownotes' src='" + this.getIcon(url) + "' alt='logo' /> <a href='" + url.toString() + "'>"
 					+ text.toString() + " </a>&#8226; ";
 			
 			if( newline )
