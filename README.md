@@ -9,5 +9,4 @@ For the licence of the logos pleace see the LOGOS.md file.
 
 You need Java to run this program.
 
-If you like the tool you're invited to press the flattr button :)
-<a href="https://flattr.com/submit/auto?user_id=bewegtton&url=https%3A%2F%2Fgithub.com%2Ftodestoast%2Fshownotes" target="_blank"><img src="//button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+If you like the tool you're invited to finance me a drink on <a href="https://paypal.me/ohrennahrung">Paypal</a> ;-)
