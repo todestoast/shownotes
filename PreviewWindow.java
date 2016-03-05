@@ -1,5 +1,8 @@
 package shownotes;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JEditorPane;
@@ -10,15 +13,42 @@ public class PreviewWindow extends JFrame
 {
 	
 	JEditorPane edit;
+	FileManager fm;
+	File filex;
 	
-	public PreviewWindow( String text)
+	public PreviewWindow( File file)
 	{
-		this.edit = new JEditorPane( "text/html", text );
+		this.filex = file;
+		this.fm = new FileManager();
+		this.edit = new JEditorPane( "text/html", fm.getContentofFile(file) );
 		this.setSize( 600, 600 );
 		this.setVisible( true );
-		this.edit.setEditable( false );
 		JScrollPane scrollPane = new JScrollPane(edit);
 		this.add(scrollPane);
+		
+		
+		this.edit.addKeyListener( new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) 
+			{
+				
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) 
+			{
+				fm.emptyFile(filex);
+				fm.writeInFile(filex, edit.getText());
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) 
+			{
+				
+			}
+		});
 		
 	}
 	
@@ -26,5 +56,7 @@ public class PreviewWindow extends JFrame
 	{
 		this.edit.setText( text);
 	}
+	
+	
 
 }

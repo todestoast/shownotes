@@ -85,7 +85,7 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 		this.add( this.panel , BorderLayout.CENTER );
 		
 		this.setVisible( true );
-		this.pw = new PreviewWindow( fm.getContentofFile(file) );
+		this.pw = new PreviewWindow( file );
 		
 		
 		this.linkfield.getDocument().addDocumentListener( this );

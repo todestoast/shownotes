@@ -83,7 +83,7 @@ public class FileManager
 	    {
 	    	System.out.println( "Error while trying to read from file!" );
 	    }
-	    return this.removeComment( new StringBuffer(returnstring) );
+	    return new StringBuffer(returnstring).toString();
 	}
 	
 	public String removeComment( StringBuffer string )
@@ -135,6 +135,14 @@ public class FileManager
 		umlauttext = umlauttext.replaceAll( "Ö", "&Ouml;" );
 		umlauttext = umlauttext.replaceAll( "Ü", "&Uuml;" );
 		umlauttext = umlauttext.replaceAll( "ß", "&szlig;" );
+		//editorpane creates html tags which need to be removed
+		umlauttext =  umlauttext.replaceAll( "<html>", "" );
+		umlauttext =  umlauttext.replaceAll( "<head>", "" );
+		umlauttext =  umlauttext.replaceAll( "<body>", "" );
+		umlauttext =  umlauttext.replaceAll( "</html>", "" );
+		umlauttext =  umlauttext.replaceAll( "</head>", "" );
+		umlauttext =  umlauttext.replaceAll( "</body>", "" );
+		
 		
 		
 		return umlauttext;
