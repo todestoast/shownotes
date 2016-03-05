@@ -1,6 +1,6 @@
 The logos that are used by this software are under the following licences:
 
-www logo: made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+www logo: https://commons.wikimedia.org/wiki/File:Applications-internet.svg (https://en.wikipedia.org/wiki/Public_domain) 
 
 imdb logo: https://commons.wikimedia.org/wiki/File:New-imdb-logo.png (https://creativecommons.org/licenses/by-sa/3.0/)
 
