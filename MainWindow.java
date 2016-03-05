@@ -14,10 +14,13 @@ import java.io.File;
 import java.util.jar.Attributes.Name;
 
 import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -34,8 +37,9 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 	JLabel checklabel;
 	Boolean wasset;
 	boolean autocomplete;
-	
+	FileManager fm;
 	File file;
+	PreviewWindow pw;
 	
 	
 	public MainWindow( Dimension dimension, File file, final boolean newline, final boolean autocomplete, final boolean affiliate, final String affiliatename )
@@ -50,6 +54,7 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 		
 		this.setLayout( new BorderLayout() );
 		this.file = file;
+		this.fm = new FileManager();
 		
 		this.panel = new JPanel();
 		this.textfield = new JTextField( 30 );
@@ -76,9 +81,11 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 		this.panel.add( this.checklabel );
 		this.panel.add( this.checkbox );
 		
+		
 		this.add( this.panel , BorderLayout.CENTER );
 		
 		this.setVisible( true );
+		this.pw = new PreviewWindow( fm.getContentofFile(file) );
 		
 		
 		this.linkfield.getDocument().addDocumentListener( this );
@@ -89,6 +96,7 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				lm.addLink( linkfield.getText(), textfield.getText(), !checkbox.getState(), newline, affiliate, affiliatename );
+				updatePreview();
 				checkbox.setState( false );
 				
 				linklabel.setText( "Link:" );
@@ -162,6 +170,10 @@ public class MainWindow extends JFrame implements ItemListener, DocumentListener
 		
 	}
 
+	public void updatePreview()
+	{
+		pw.refreshContent( fm.getContentofFile(file) );
+	}
 
 	@Override
 	public void removeUpdate(DocumentEvent e) {
