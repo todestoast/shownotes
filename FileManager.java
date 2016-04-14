@@ -101,11 +101,11 @@ public class FileManager
 		return file.exists();
 	}
 	
-	public void writeInFile( File file, String text )
+	public void writeInFile( File file, String text, boolean newline )
 	{
 			try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter( file, true)))) 
 			{
-			    out.print( fixUmlaute(text) );
+			    out.print( fixUmlaute(text, newline) );
 			}catch (IOException e) 
 			{
 			    System.out.println( "Couldn't write in File" );
@@ -126,7 +126,7 @@ public class FileManager
 		
 	}
 	
-	public String fixUmlaute( String umlauttext )
+	public String fixUmlaute( String umlauttext, boolean newline )
 	{
 		umlauttext = umlauttext.replaceAll( "ö", "&ouml;" );
 		umlauttext = umlauttext.replaceAll( "ä", "&auml;" );
@@ -142,6 +142,8 @@ public class FileManager
 		umlauttext =  umlauttext.replaceAll( "</html>", "" );
 		umlauttext =  umlauttext.replaceAll( "</head>", "" );
 		umlauttext =  umlauttext.replaceAll( "</body>", "" );
+		if( !newline )
+			umlauttext = umlauttext.replaceAll( "\n", " " );
 		
 		
 		

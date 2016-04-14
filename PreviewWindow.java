@@ -40,7 +40,7 @@ public class PreviewWindow extends JFrame
 			public void keyReleased(KeyEvent e) 
 			{
 				fm.emptyFile(filex);
-				fm.writeInFile(filex, edit.getText());
+				fm.writeInFile(filex, edit.getText(), false);
 			}
 			
 			@Override

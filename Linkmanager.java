@@ -23,7 +23,7 @@ public class Linkmanager
 		this.fm = new FileManager();
 		this.file = file;
 		fm.writeInFile( file, "<div>Die Shownotes wurden mit der Software <a href='https://github.com/todestoast/shownotes/'>shownotes</a> "
-				+ "erstellt. Die Lizenzen der verwendeten Logos finden sich <a href='https://github.com/todestoast/shownotes/blob/master/LOGOS.md'>hier</a></div><br />");
+				+ "erstellt. Die Lizenzen der verwendeten Logos finden sich <a href='https://github.com/todestoast/shownotes/blob/master/LOGOS.md'>hier</a></div><br />", false);
 	}
 	
 	public String getHeader( String stringurl )
@@ -193,7 +193,7 @@ public class Linkmanager
 				linkhtml = linkhtml + "\n";
 			}
 			
-			fm.writeInFile( file, linkhtml.toString() );
+			fm.writeInFile( file, linkhtml.toString(), newline );
 		}else
 		{
 			FileManager pcsManager = new FileManager();
@@ -201,11 +201,11 @@ public class Linkmanager
 			final String timestamp = url.toString();
 			
 			final String timestamphtml = "<ul><li><strong>" + text.toString() + " [" +  timestamp + "]</strong></li></ul>";
-			fm.writeInFile( file, timestamphtml.toString() );
+			fm.writeInFile( file, timestamphtml.toString(), newline );
 			
 			File pcsFile = new File( file.getAbsolutePath().replaceAll(".html", ".pcs") );
 			
-			pcsManager.writeInFile(pcsFile, url + ".000" + " " + text + "\n");
+			pcsManager.writeInFile(pcsFile, url + ".000" + " " + text + "\n", newline);
 			
 		}
 		
